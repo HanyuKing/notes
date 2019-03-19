@@ -5,7 +5,7 @@ import java.util.Stack;
 public class QuickSort {
     public static void main(String[] args) {
         int[] data = new int[] {123, 2, 1, 5, 234, 56, 1, 1, 2, 9, 2, 3};
-        quickSort3(data, 0, data.length - 1);
+        quickSort(data, 0, data.length - 1);
         for(int i = 0; i < data.length; i++) {
             System.out.print(data[i] + " ");
         }
@@ -55,19 +55,18 @@ public class QuickSort {
     public static void quickSort(int[] data, int left, int right) {
         int i = left;
         int j = right;
-
         int base = data[left];
         while (i < j) {
-            while (i < j && data[j] > base) j--;
-            data[i++] = data[j];
-            while (i < j && data[i] < base) i++;
-            data[j--] = data[i];
+            while (i < j && data[j] > base) --j;
+            data[i] = data[j];
+            ++i;
+            while (i < j && data[i] < base) ++i;
+            data[j] = data[i];
         }
         data[i] = base;
-
         if(left < i)
             quickSort(data, left, i - 1);
-        if(i < right)
+        if(i + 1 < right)
             quickSort(data, i + 1, right);
     }
 }
